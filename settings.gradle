@@ -1,0 +1,2 @@
+include ':PlainCircleCi'
+project(':PlainCircleCi').projectDir = new File('app')
