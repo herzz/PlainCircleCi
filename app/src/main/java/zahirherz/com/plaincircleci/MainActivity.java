@@ -4,14 +4,25 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class MainActivity extends Activity {
+
+    @InjectView(R.id.button_main_1)
+    Button button_main_1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
     }
 
 
@@ -35,5 +46,11 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.button_main_1)
+    public void sayHi(Button button) {
+        //button.setText("Hello!");
+        Crouton.makeText(MainActivity.this, "Button Was Pressed!", Style.ALERT).show();
     }
 }
