@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.SeekBar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -17,6 +21,16 @@ public class MainActivity extends Activity {
 
     @InjectView(R.id.button_main_1)
     Button button_main_1;
+    @InjectView(R.id.editText_main)
+    EditText editText_main;
+    @InjectView(R.id.radioButton_1)
+    RadioButton radioButton_1;
+    @InjectView(R.id.radioButton_2)
+    RadioButton radioButton_2;
+    @InjectView(R.id.checkBox_main)
+    CheckBox checkBox_main;
+    @InjectView(R.id.seekBar_main)
+    SeekBar seekBar_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
