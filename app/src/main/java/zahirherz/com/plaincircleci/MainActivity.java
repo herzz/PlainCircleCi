@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -61,6 +62,17 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @OnCheckedChanged(R.id.radioButton_1)
+    public void onChecked1(boolean checked) {
+        if (checked) {
+            Crouton.makeText(MainActivity.this, "Radio 1 Chekced", Style.CONFIRM).show();
+        } else {
+            Crouton.makeText(MainActivity.this, "Radio 2 Checked", Style.ALERT).show();
+        }
+    }
+
+
 
     @OnClick(R.id.button_main_1)
     public void sayHi(Button button) {
