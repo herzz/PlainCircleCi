@@ -1,6 +1,7 @@
 package zahirherz.com.plaincircleci;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,15 +11,25 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import zahirherz.com.plaincircleci.model.Flower;
+import zahirherz.com.plaincircleci.network.api;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ListActivity {
+    List<Flower> flowerList;
+
 
     @InjectView(R.id.button_main_1)
     Button button_main_1;
@@ -38,6 +49,27 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
+        final RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://services.hanselandpetal.com").build();
+
+        api flowerapi = restAdapter.create(api.class);
+
+        flowerapi.getData(new Callback<List<Flower>>() {
+            @Override
+            public void success(List<Flower> flowers, Response response) {
+                flowerList = flowers;
+                adapter adapt = new adapter(getApplicationContext(), R.layout.item_file, flowerList);
+                setListAdapter(adapt);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Crouton.makeText(MainActivity.this, "FAILED " + error, Style.CONFIRM).show();
+            }
+        });
+
+
     }
 
 
